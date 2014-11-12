@@ -1,8 +1,15 @@
 {
     "name": "lleitelab/devdeprimeiraviajem",
     "description": "Projeto #devdeprimeiraviajem",
+    "version" : "0.0.1",
+    "type" : "github",
     "require": {
         "silex/silex": "~1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Site\\": "app/Site/src"
+        }
     },
     "license": "MIT",
     "authors": [
