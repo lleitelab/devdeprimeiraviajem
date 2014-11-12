@@ -1,0 +1,20 @@
+{
+  "name": "devdeprimeiraviajem",
+  "version": "0.0.1",
+  "homepage": "https://github.com/lleitelab/devdeprimeiraviajem",
+  "authors": [
+    "Leandro Leite <leandro@lenadroleite.info>"
+  ],
+  "description": "depencencias do projeto",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.0"
+  }
+}

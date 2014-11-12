@@ -1,0 +1,14 @@
+{
+    "name": "lleitelab/devdeprimeiraviajem",
+    "description": "Projeto #devdeprimeiraviajem",
+    "require": {
+        "silex/silex": "~1.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leandro Leite",
+            "email": "leandro@lenadroleite.info"
+        }
+    ]
+}
