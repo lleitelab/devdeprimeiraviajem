@@ -10,6 +10,6 @@ class Index
 {
     public function get(Request $request, Application $app)
     {
-        return "opa manolo";
+        return  $app['twig']->render('index.php');
     }
 }

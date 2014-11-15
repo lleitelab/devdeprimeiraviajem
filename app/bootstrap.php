@@ -15,8 +15,14 @@ try {
     foreach ($modulesDir as $dir) {
         if ($dir->isDir() && !$dir->isDot()) {
             $routesFile = $dir->getPathname() . '/routes.php';
+            $initFile   = $dir->getPathname() . '/init.php';
+
             if (file_exists($routesFile)) {
                 include $routesFile;
+            }
+
+            if (file_exists($initFile)) {
+                include $initFile;
             }
         }
     }

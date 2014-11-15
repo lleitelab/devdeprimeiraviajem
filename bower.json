@@ -1,5 +1,5 @@
 {
-  "name": "devdeprimeiraviajem",
+  "name": "#devdeprimeiraviajem",
   "version": "0.0.1",
   "homepage": "https://github.com/lleitelab/devdeprimeiraviajem",
   "authors": [
@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap-sass-official": "~3.3.0"
+    "jquery"                 : "1.11.1",
+    "bootstrap-sass-official": "3.3.1"
   }
 }

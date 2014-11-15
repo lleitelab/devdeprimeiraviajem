@@ -5,29 +5,48 @@ module.exports = function(grunt) {
   grunt.initConfig({
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
+    bower : {
+      path : "bower_components"
+    },
+    bootstrap : {
+      path : {
+        js : "<%= bower.path%>/bootstrap-sass-official/assets/javascripts/bootstrap.js",
+        css : "<%= bower.path%>/bootstrap-sass-official/assets/stylesheets/"
+      }
+    },
+    final_path : {
+      js : "public/js",
+      css : "public/assets/css"
+    },
     banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
       '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
       '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> - <%= pkg.author.ref %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     // Task configuration.
+    copy : {
+      jquery : {
+        src : ' <%= bower.path %>/jquery/dist/jquery.min.map',
+        dest : '<%= final_path.js %>/jquery.min.map'
+      }
+    },
     concat: {
       options: {
-        banner: '<%= banner %>',
-        stripBanners: true
       },
-      dist: {
-        src: ['lib/<%= pkg.name %>.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+      vendors: {
+        src: [
+          ' <%= bower.path %>/jquery/dist/jquery.min.js',
+          '<%= uglify.bootstrap.dest %>'
+        ],
+        dest: '<%= final_path.js %>/vendor.min.js'
       }
     },
     uglify: {
       options: {
-        banner: '<%= banner %>'
       },
-      dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: 'dist/<%= pkg.name %>.min.js'
+      bootstrap: {
+        src: '<%= bootstrap.path.js %>',
+        dest: 'lib/script/bootstrap.min.js'
       }
     },
     jshint: {
@@ -56,13 +75,14 @@ module.exports = function(grunt) {
     qunit: {
       files: ['test/**/*.html']
     },
-    sass: {                              // Task
-      dist: {                            // Target
-        options: {                       // Target options
-          style: 'compressed'
+    sass: {
+      dist: {
+        options: {
+          style: 'compressed',
+          sourcemap: 'inline'
         },
-        files: {                        // Dictionary of files
-          'public/css/main.css': 'lib/sass/main.scss'       // 'destination': 'source'
+        files: {
+          '<%= final_path.css%> main.min.css': 'lib/sass/main.scss'
         }
       }
     },
@@ -79,15 +99,16 @@ module.exports = function(grunt) {
   });
 
   // These plugins provide necessary tasks.
-/*  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');*/
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  // grunt.loadNpmTasks('grunt-contrib-qunit');
+  // grunt.loadNpmTasks('grunt-contrib-jshint');
+  // grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
 
   // Default task.
 //  grunt.registerTask('default', ['sass','jshint', 'qunit', 'concat', 'uglify']);
-  grunt.registerTask('default', ['sass']);
+  grunt.registerTask('default', ['copy','sass', 'uglify', 'concat']);
 
 };
