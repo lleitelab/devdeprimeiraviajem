@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
+
 $app = new Silex\Application();
 
-
-$app['debug'] = true;
+$app['env'] = $_ENV['env'] ?: 'dev';
 
 // initialize avaliable routes of modules
 $path = realpath(__DIR__);
@@ -25,6 +25,10 @@ try {
                 include $initFile;
             }
         }
+    }
+
+    if ('test' == $app['env']) {
+        return $app;
     }
 
     $app->run();

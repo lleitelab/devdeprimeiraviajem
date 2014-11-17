@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit bootstrap="./vendor/autoload.php"
+         colors="true"
+         syntaxCheck="true"
+         >
+    <testsuites>
+        <testsuite name="Teste das funcionalidades básicas do Site">
+            <directory suffix=".php">./app/Site/tests/</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="env" value="test"/>
+    </php>
+</phpunit>
